@@ -14,58 +14,65 @@
 
   </header>
   <main>
-    <div class="filter">
-      <div class="filter-wrapper">
-        <h2>Price</h2>
-        <form action="">
-          <div class="from-to">
-            <b>From</b>
-              <input type="text" placeholder="1">
-              <b>to</b>
-              <input type="text" placeholder="10000">
-          </div>
-          <input type="checkbox" name="type" value="rent"> For rent
-          <input type="checkbox" name="type" value="sale"> For sale<Br>
-          <input type="checkbox" name="type" value="long-term"> For long-term rent<Br>
-          <b>State</b>
-            <select>
-              <option>All states</option>
-              <option>Lviv</option>
-              <option>Kyiv</option>
-              <option>Ternopil</option>
-            </select><Br>
-            <b>City</b>
-            <select>
-            <option>All cities</option>
-              <option>Lviv</option>
-              <option>Kyiv</option>
-              <option>Boryslav</option>
-            </select><Br>
-          <b>Square</b>
-          <input type="number"  placeholder="1">
-          <br>
-          <b>Floor</b>
-          <input type="number"  placeholder="1">
-          <br>
-          <b>Floor<br>numbers</b>
-          <input type="number"  placeholder="1">
-          <p>
-          <b>Realty type</b>
-          <select>
-            <option>All types</option>
-              <option>Garage</option>
-              <option>House</option>
-              <option>Storage</option>
-          </select><Br>
-          <p><b>Type of information:</b><Br>
-          <input type="checkbox" name="information" value="latest"> Latest<Br>
-          </p>
-          <p><input type="submit" value="Apply"></p>
-        </form>
+    <div class="divs">
+      <div class="filter">
+        <div class="filter-wrapper">
+          <h2>Price</h2>
+          <form action="{{ url_for('result') }}">
+            <div class="from-to">
+              <b>From</b>
+                <input name="from" type="text" placeholder="1">
+                <b>to</b>
+                <input name="to" type="text" placeholder="10000">
+            </div>
+            <div>
+              <input type="radio" name="operation_type_id" value="daily_rent"> For rent
+              <input type="radio" name="operation_type_id" value="sale"> For sale<Br>
+              <input type="radio" name="operation_type_id" value="long_term_rental"> For long-term rent<Br>
+              <input type="radio" name="operation_type_id" value="any_operation"> Any operation<Br>
+            </div>
+              <b>State</b>
+              <select name="state_id">
+                <option value = "all_states">All States</option>
+                {% for i in states %}
+                  <option value = {{i.get("id")}}>{{i.get("name")}}</option>
+                {% endfor %}}
+              </select><Br>
+              <!--<b>City</b>
+              <select>
+              <option>All cities</option>
+                <option>Lviv</option>
+                <option>Kyiv</option>
+                <option>Boryslav</option>
+              </select><Br>-->
+            <b>Square</b>
+            <input type="number" name="square" placeholder="1">
+            <br>
+            <b>Floor</b>
+            <input type="number" name="floor" placeholder="1">
+            <br>
+            <b>Floor<br>numbers</b>
+            <input type="number" name="floors_number" placeholder="1">
+            <p>
+            <b>Realty type</b>
+            <select name="realty_type_id">
+                {% for i in realty_types %}
+                  <option value = {{i.get("id")}}>{{i.get("name")}}</option>
+                {% endfor %}}
+              </select><Br>
+            <p><b>Type of information:</b><Br>
+            <input type="checkbox" name="latest" value='true'> Latest<Br>
+            </p>
+            <p><input type="submit" value="Apply"></p>
+          </form>
+        </div>
       </div>
-    </div>
-    <div class="info">
-
+      <div class="result">
+          <h1>Results</h1>
+          {% for key, items in list.items() %}
+            <p>{{key}}</p>
+          {% endfor %}
+      </div>
     </div>
   </main>
   <footer>
