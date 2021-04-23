@@ -17,46 +17,47 @@
     <div class="filter">
       <div class="filter-wrapper">
         <h2>Price</h2>
-        <form action="">
+        <form action="{{ url_for('result') }}">
           <div class="from-to">
             <b>From</b>
-              <input type="text" placeholder="1">
+              <input name="price_from" type="text" placeholder="1">
               <b>to</b>
-              <input type="text" placeholder="10000">
+              <input name="price_to" type="text" placeholder="10000">
           </div>
-          <input type="checkbox" name="type" value="rent"> For rent
-          <input type="checkbox" name="type" value="sale"> For sale<Br>
-          <input type="checkbox" name="type" value="long-term"> For long-term rent<Br>
-          <b>State</b>
-            <select>
-              <option>All states</option>
-              <option>Lviv</option>
-              <option>Kyiv</option>
-              <option>Ternopil</option>
+          <div>
+            <input type="radio" name="operation_type" value="rent"> For rent
+            <input type="radio" name="operation_type" value="sale"> For sale<Br>
+            <input type="radio" name="operation_type" value="long-term"> For long-term rent<Br>
+          </div>
+            <b>State</b>
+            <select name="state">
+              <option value = "all_states">All States</option>
+              {% for i in states %}
+                <option value = {{i.get("id")}}>{{i.get("name")}}</option>
+              {% endfor %}}
             </select><Br>
-            <b>City</b>
+            <!--<b>City</b>
             <select>
             <option>All cities</option>
               <option>Lviv</option>
               <option>Kyiv</option>
               <option>Boryslav</option>
-            </select><Br>
+            </select><Br>-->
           <b>Square</b>
-          <input type="number"  placeholder="1">
+          <input type="number" name="square" placeholder="1">
           <br>
           <b>Floor</b>
-          <input type="number"  placeholder="1">
+          <input type="number" name="floor" placeholder="1">
           <br>
           <b>Floor<br>numbers</b>
-          <input type="number"  placeholder="1">
+          <input type="number" name="floor_numbers" placeholder="1">
           <p>
           <b>Realty type</b>
-          <select>
-            <option>All types</option>
-              <option>Garage</option>
-              <option>House</option>
-              <option>Storage</option>
-          </select><Br>
+          <select name="realty_type">
+              {% for i in realty_types %}
+                <option value = {{i.get("id")}}>{{i.get("name")}}</option>
+              {% endfor %}}
+            </select><Br>
           <p><b>Type of information:</b><Br>
           <input type="checkbox" name="information" value="latest"> Latest<Br>
           </p>
