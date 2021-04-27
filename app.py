@@ -13,8 +13,6 @@ def main_page():
 
 @app.route('/result')
 def result():
-    states = requests.get("http://127.0.0.1:5000/states")
-    realty_types = requests.get("http://127.0.0.1:5000/realty_types")
     operation_types = requests.get("http://127.0.0.1:5000/operation_types").json()
     response = request.args
     request_to_client_service = {'price': {}, 'page_ads_number': 10, 'page': 1}
