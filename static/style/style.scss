@@ -1,0 +1,162 @@
+$orange_color: #f25e20;
+$bg-main: #ffffff;
+
+html,
+body {
+  font-family: "Noto Sans JP", sans-serif !important;
+  background-color: $bg-main;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+}
+
+header {
+  text-align: center;
+  background-color: #252422;
+  width: 100%;
+  margin: 0;
+  max-height: 100px;
+  z-index: 100;
+  font-size: 38px;
+  position: fixed;
+  left: 0;
+  top: 0;
+
+  h1 {
+    margin: 0;
+    padding: 0;
+    color: $orange_color;
+  }
+}
+
+main {
+  width: 100%;
+  position: relative;
+  height: 70vh ;
+  float: left;
+
+  .filters {
+    min-width: 300px;
+    background-color: #403d38;
+    top: 88px;
+    left: 0;
+    color: $orange_color;
+
+    .filter-wrapper {
+      font-size: 20px;
+
+      h2 {
+        text-align: center;
+        padding-top: 0;
+        margin: 10px 0 0 0;
+      }
+
+      .from-to {
+        margin: 10px 0;
+        max-width: 100%;
+
+        input {
+          max-width: 60px;
+          border-radius: 10px;
+          border: 0px;
+          background-color: #ccc8bc;
+          text-align: center;
+        }
+      }
+
+      select {
+        float: right;
+      }
+
+      input[type="number"] {
+        float: right;
+        border: 0px;
+        max-width: 100px;
+        border-radius: 10px;
+        background-color: #252422;
+        padding-left: 10px;
+      }
+    }
+  }
+}
+
+footer {
+  background-color: #ccc6ba;
+  position: relative;
+  float: left;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  min-height: 50px;
+  color: #fbf5e9;
+  text-align: right;
+  font-size: 30px;
+
+  .footer-text {
+    padding: 5px;
+    padding-right: 15px;
+  }
+}
+
+.result {
+  padding-left: 45px;
+  padding-left: 70px;
+}
+
+.divs {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+
+.error-main-text {
+  color: $orange_color;
+  font-weight: 900;
+  font-size: 10rem;
+}
+
+.btn-outline-orange {
+  color: $orange_color;
+  border-color: $orange_color;
+}
+
+.btn-outline-orange:hover {
+  background-color: $orange_color;
+  color: $bg-main;
+}
+
+@mixin wh-list {
+  @for $i from 0 through 10 {
+    .w-#{$i*10} {
+      width: $i * 10% !important;
+    }
+    .h-#{$i*10} {
+      height: $i * 10% !important;
+    }
+  }
+}
+
+@include wh-list;
+
+@mixin font-size-list {
+  @for $i from 1 through 15 {
+    .fs-#{$i*1} {
+      font-size: $i * 1rem !important;
+    }
+  }
+}
+
+@include font-size-list;
+
+
+.align-center{
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
