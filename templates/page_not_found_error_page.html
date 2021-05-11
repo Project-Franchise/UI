@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container-fluid h-100 w-100">
+    <div class="row h-100">
+        <div class="col">
+            <div class="w-40 px-5 position-relative pb-5 align-center text-center">
+                <h1 class="error-main-text my-2">
+                    404
+                </h1>
+                <p class="my-2">The page you are looking for might have been removed had its name changed or is
+                    temporarily
+                    unavailable.</p>
+                <a class="btn btn-outline-orange my-3" href="{{url_for('main_page')}}">GO HOME</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

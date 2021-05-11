@@ -1,0 +1,15 @@
+{% extends "base.html" %} {% block content %}
+<div class="container-fluid h-100 w-100">
+    <div class="row h-100">
+        <div class="col">
+            <div class="w-40 px-5 position-relative pb-5 align-center text-center">
+                <p class="error-main-text my-4 fs-3" style="line-height: 100%;">Ooops, something went wrong..</p>
+                <div class="my-2">
+                    <p>Internal server error<br>Please be patient and try again later.</p>
+                </div>
+                <a class="btn btn-outline-orange my-3" href="{{url_for('main_page')}}">GO HOME</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

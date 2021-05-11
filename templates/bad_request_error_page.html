@@ -1,0 +1,15 @@
+{% extends "base.html" %} {% block content %}
+<div class="container-fluid h-100 w-100">
+    <div class="row h-100">
+        <div class="col">
+            <div class="w-40 px-5 position-relative pb-5 align-center text-center">
+                <p class="error-main-text my-4 fs-10" style="line-height: 100%;">400</p>
+                <div class="my-2">
+                    <p class="error-main-text fs-2">Bad request</p><p>Your request resulted in an error.</p>
+                </div>
+                <a class="btn btn-outline-orange my-3" href="{{url_for('main_page')}}">GO HOME</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
