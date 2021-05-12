@@ -65,40 +65,57 @@
         <div class="col">
             <div class="container-fluid bg-light h-100">
                 <h1>Results</h1>
-                {% set item_in_for = 0 %}
-                    {% for item in range(0, ((count/2)|int) + 1) %}
+{#                {% set item_in_for = 0 %}#}
+{#                    {% for item in range(0, ((count/2)|int) + 1) %}#}
             {#          <p>{{key}}</p>#}
-                        <div class="row d-flex justify-content-around">
-                        {% if item_in_for < count %}
-                            <div class="card w-40">
-                                <div class="col">
-                                    {% for key, value in list[item_in_for].items() %}
-                                        {% if key == 'href' %}
-                                            <a href={{ value }}><i>Go to the original announcement {{ item_in_for }}</i></a>
-                                        {% else %}
-                                        <b>{{ key }}</b>: {{ value }}<br>
-                                        {% endif %}
-                                    {% endfor %}
-                                    {% set item_in_for = item_in_for + 1 %}
-                                </div>
+{#                        <div class="row d-flex justify-content-around">#}
+{#                        {% if item_in_for < count %}#}
+{#                            <div class="card w-40">#}
+{#                                <div class="col">#}
+{#                                    {% for key, value in list[item_in_for].items() %}#}
+{#                                        {% if key == 'href' %}#}
+{#                                            <a href={{ value }}><i>Go to the original announcement {{ item_in_for }}</i></a>#}
+{#                                        {% else %}#}
+{#                                        <b>{{ key }}</b>: {{ value }}<br>#}
+{#                                        {% endif %}#}
+{#                                    {% endfor %}#}
+{#                                    {% set item_in_for = item_in_for + 1 %}#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        {% endif %}#}
+{#                        {% if item_in_for < count %}#}
+{#                            <div class="card w-40">#}
+{#                                <div class="col">#}
+{#                                    {% for key, value in list[item_in_for].items() %}#}
+{#                                        {% if key == 'href' %}#}
+{#                                            <a href={{ value }}><i>Go to the original announcement {{ item_in_for }}</i></a>#}
+{#                                        {% else %}#}
+{#                                        <b>{{ key }}</b>: {{ value }}<br>#}
+{#                                        {% endif %}#}
+{#                                    {% endfor %}#}
+{#                                    {% set item_in_for = item_in_for + 1 %}#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        {% endif %}#}
+{#                        </div>#}
+{#                    {% endfor %}#}
+                <div class="col">
+                    <div class="list-group d-flex flex-row flex-wrap justify-content-around">
+                    {% for item in list %}
+                        <div class="card w-40">
+                            <div class="col">
+                                {% for key, value in item.items() %}
+                                     {% if key == 'href' %}
+                                         <a href={{ value }}><i>Go to the original announcement {{ item_in_for }}</i></a>
+                                     {% else %}
+                                         <b>{{ key }}</b>: {{ value|string }}<br>
+                                     {% endif %}
+                                {% endfor %}
                             </div>
-                        {% endif %}
-                        {% if item_in_for < count %}
-                            <div class="card w-40">
-                                <div class="col">
-                                    {% for key, value in list[item_in_for].items() %}
-                                        {% if key == 'href' %}
-                                            <a href={{ value }}><i>Go to the original announcement {{ item_in_for }}</i></a>
-                                        {% else %}
-                                        <b>{{ key }}</b>: {{ value }}<br>
-                                        {% endif %}
-                                    {% endfor %}
-                                    {% set item_in_for = item_in_for + 1 %}
-                                </div>
-                            </div>
-                        {% endif %}
                         </div>
                     {% endfor %}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
