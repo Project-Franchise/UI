@@ -27,7 +27,6 @@ def main_page():
 
 @app.route('/result')
 def result():
-    cities = {city['id']: city['name'] for city in get_all_cities()}
     states = requests.get("http://127.0.0.1:5000/states")
     realty_types = requests.get("http://127.0.0.1:5000/realty_types")
     operation_types = requests.get("http://127.0.0.1:5000/operation_types").json()
