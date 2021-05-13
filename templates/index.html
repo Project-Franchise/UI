@@ -4,56 +4,84 @@
     <div class="row  h-100">
         <div class="col-md-3 filters m-0 p-0">
             <div class="filter-wrapper px-3 mx-2">
-                <h2 class="my-3">Price</h2>
                 <form action="{{ url_for('result') }}">
-                    <div class="from-to">
-                        <b>From</b>
-                        <input name="from" type="text" placeholder="1">
-                        <b>to</b>
-                        <input name="to" type="text" placeholder="10000">
-                    </div>
+                    <br>
                     <div>
-                        <input type="radio" name="operation_type_id" value="daily_rent"> For rent
-                        <input type="radio" name="operation_type_id" value="sale"> For sale<Br>
-                        <input type="radio" name="operation_type_id" value="long_term_rental"> For long-term
-                        rent<Br>
-                        <input type="radio" name="operation_type_id" value="any_operation"> Any operation<Br>
+                        <input type="radio" name="operation_type_id" value="1"> For sale<Br>
+                        <input type="radio" name="operation_type_id" value="2"> For long-term rent<Br>
                     </div>
-                    <b>State</b>
+                    State
                     <select name="state_id">
                         <option value="all_states">All States</option>
                         {% for i in states %}
                         <option value={{i.get("id")}}>{{i.get("name")}}</option>
                         {% endfor %}}
-                    </select><Br>
-                    <b>Square</b>
-                    <input type="number" name="square" placeholder="1">
+                    </select><br>
                     <br>
-                    <b>Floor</b>
-                    <input type="number" name="floor" placeholder="1">
-                    <br>
-                    <b>Floor<br>numbers</b>
-                    <input type="number" name="floors_number" placeholder="1">
+                    <div class="text"><b>From</b><b>To</b></div><br>
+                    <div class="characteristics">
+                        Price
+                        <div class="inputs">
+                            <input type="number" name="price-ge" placeholder="1" class="square-floors">
+                            <input type="number" name="price-le" placeholder="10000" class="square-floors">
+                        </div>
+                    </div>
+                    <div class="characteristics">
+                        Square
+                        <div class="inputs">
+                            <input type="number" name="square-ge" placeholder="1" class="square-floors">
+                            <input type="number" name="square-le" placeholder="100" class="square-floors">
+                        </div>
+                    </div>
+                    <div class="characteristics">
+                        Floor
+                        <div class="inputs">
+                            <input type="number" name="floor-ge" placeholder="1" class="square-floors">
+                            <input type="number" name="floor-le" placeholder="10" class="square-floors">
+                        </div>
+                    </div>
+                    <div class="characteristics">
+                        Floor<br>numbers
+                        <div class="inputs">
+                            <input type="number" name="floors_number-ge" placeholder="1" class="square-floors">
+                            <input type="number" name="floors_number-le" placeholder="10" class="square-floors">
+                        </div>
+                    </div><br>
                     <p>
-                        <b>Realty type</b>
+                        Realty type
                         <select name="realty_type_id">
                             {% for i in realty_types %}
                             <option value={{i.get("id")}}>{{i.get("name")}}</option>
                             {% endfor %}}
                         </select><Br>
-                    <p><b>Type of information:</b><Br>
+                    <p>Type of information:<Br>
                         <input type="checkbox" name="latest" value='true'> Latest<Br>
                     </p>
                     <p><input type="submit" value="Apply"></p>
                 </form>
             </div>
         </div>
-
         <div class="col">
-            <h1>Results</h1>
-            {% for key, items in list.items() %}
-            <p>{{key}}</p>
-            {% endfor %}
+            <div class="container-fluid bg-light h-100">
+                <h1>Results</h1>
+                <div class="col">
+                    <div class="list-group d-flex flex-row flex-wrap justify-content-around">
+                        {% for item in list %}
+                        <div class="card w-40">
+                            <div class="col">
+                                {% for key, value in item.items() %}
+                                {% if key == 'href' %}
+                                <a href={{ value }}><i>Go to the original announcement {{ item_in_for }}</i></a>
+                                {% else %}
+                                <b>{{ key }}</b>: {{ value|string }}<br>
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
