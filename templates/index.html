@@ -5,21 +5,20 @@
         <div class="col-md-3 filters m-0 p-0">
             <div class="filter-wrapper px-3 mx-2">
                 <form action="{{ url_for('result') }}">
-                    <br><div>
-                        <input type="radio" name="operation_type_id" value="daily_rent"> For rent
-                        <input type="radio" name="operation_type_id" value="sale"> For sale<Br>
-                        <input type="radio" name="operation_type_id" value="long_term_rental"> For long-term
-                        rent<Br>
-                        <input type="radio" name="operation_type_id" value="any_operation"> Any operation<Br>
+                    <br>
+                    <div>
+                        <input type="radio" name="operation_type_id" value="1"> For sale<Br>
+                        <input type="radio" name="operation_type_id" value="2"> For long-term rent<Br>
                     </div>
                     State
-                    <select name="state_id" >
+                    <select name="state_id">
                         <option value="all_states">All States</option>
                         {% for i in states %}
                         <option value={{i.get("id")}}>{{i.get("name")}}</option>
                         {% endfor %}}
                     </select><br>
-                    <br><div class="text"><b>From</b><b>To</b></div><br>
+                    <br>
+                    <div class="text"><b>From</b><b>To</b></div><br>
                     <div class="characteristics">
                         Price
                         <div class="inputs">
@@ -48,7 +47,7 @@
                             <input type="number" name="floors_number-le" placeholder="10" class="square-floors">
                         </div>
                     </div><br>
-                        <p>
+                    <p>
                         Realty type
                         <select name="realty_type_id">
                             {% for i in realty_types %}
@@ -65,55 +64,21 @@
         <div class="col">
             <div class="container-fluid bg-light h-100">
                 <h1>Results</h1>
-{#                {% set item_in_for = 0 %}#}
-{#                    {% for item in range(0, ((count/2)|int) + 1) %}#}
-            {#          <p>{{key}}</p>#}
-{#                        <div class="row d-flex justify-content-around">#}
-{#                        {% if item_in_for < count %}#}
-{#                            <div class="card w-40">#}
-{#                                <div class="col">#}
-{#                                    {% for key, value in list[item_in_for].items() %}#}
-{#                                        {% if key == 'href' %}#}
-{#                                            <a href={{ value }}><i>Go to the original announcement {{ item_in_for }}</i></a>#}
-{#                                        {% else %}#}
-{#                                        <b>{{ key }}</b>: {{ value }}<br>#}
-{#                                        {% endif %}#}
-{#                                    {% endfor %}#}
-{#                                    {% set item_in_for = item_in_for + 1 %}#}
-{#                                </div>#}
-{#                            </div>#}
-{#                        {% endif %}#}
-{#                        {% if item_in_for < count %}#}
-{#                            <div class="card w-40">#}
-{#                                <div class="col">#}
-{#                                    {% for key, value in list[item_in_for].items() %}#}
-{#                                        {% if key == 'href' %}#}
-{#                                            <a href={{ value }}><i>Go to the original announcement {{ item_in_for }}</i></a>#}
-{#                                        {% else %}#}
-{#                                        <b>{{ key }}</b>: {{ value }}<br>#}
-{#                                        {% endif %}#}
-{#                                    {% endfor %}#}
-{#                                    {% set item_in_for = item_in_for + 1 %}#}
-{#                                </div>#}
-{#                            </div>#}
-{#                        {% endif %}#}
-{#                        </div>#}
-{#                    {% endfor %}#}
                 <div class="col">
                     <div class="list-group d-flex flex-row flex-wrap justify-content-around">
-                    {% for item in list %}
+                        {% for item in list %}
                         <div class="card w-40">
                             <div class="col">
                                 {% for key, value in item.items() %}
-                                     {% if key == 'href' %}
-                                         <a href={{ value }}><i>Go to the original announcement {{ item_in_for }}</i></a>
-                                     {% else %}
-                                         <b>{{ key }}</b>: {{ value|string }}<br>
-                                     {% endif %}
+                                {% if key == 'href' %}
+                                <a href={{ value }}><i>Go to the original announcement {{ item_in_for }}</i></a>
+                                {% else %}
+                                <b>{{ key }}</b>: {{ value|string }}<br>
+                                {% endif %}
                                 {% endfor %}
                             </div>
                         </div>
-                    {% endfor %}
+                        {% endfor %}
                     </div>
                 </div>
             </div>

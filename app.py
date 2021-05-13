@@ -49,7 +49,7 @@ def result():
                     return redirect(url_for("main_page"))
             elif key == "operation_type_id":
                 for operations in operation_types:
-                    if operations["name"] == value:
+                    if str(operations["id"]) == value:
                         request_to_client_service[key] = operations["id"]
                         break
             elif "latest" in key and key == "latest":
@@ -65,13 +65,14 @@ def result():
     response_from_server = requests.post("http://127.0.0.1:5000/realty", json=request_to_client_service).json()
     data_for_user = []
     for items in response_from_server:
+        details = items["realty_details"]
         data_for_user.append(
             {
-                "City": cities[items[0]["city_id"]],
-                "Floor": items[1]["floor"],
-                "Square": items[1]["square"],
-                "Price": items[1]["price"],
-                "href": f'{SERVICES[items[0]["service_id"]]}{items[1]["original_url"]}'
+                "City": items["city"]["name"],
+                "Floor": details["floor"],
+                "Square": details["square"],
+                "Price": details["price"],
+                "href": f'{SERVICES[items["service"]["id"]]}{details["original_url"]}'
             }
         )
     return render_template("index.html", states=states.json(), realty_types=realty_types.json(), list=data_for_user,
