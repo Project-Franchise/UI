@@ -11,10 +11,6 @@ app.register_error_handler(404, page_not_found)
 app.register_error_handler(500, internal_server_error)
 
 
-def get_all_cities():
-    return requests.get("http://127.0.0.1:5000/city").json()
-
-
 @app.route('/')
 def main_page():
     """
@@ -23,6 +19,16 @@ def main_page():
     states = requests.get("http://127.0.0.1:5000/states")
     realty_types = requests.get("http://127.0.0.1:5000/realty_types")
     return render_template("index.html", states=states.json(), realty_types=realty_types.json(), list={})
+
+
+@app.route("/cities/<int:state_id>")
+def get_cities_by_sattes(state_id):
+    """
+    Returns html - dropdown of cities in state with state_id
+    """
+    cities = requests.get(f"http://127.0.0.1:5000/cities?state_id={state_id}")
+    print(cities.json())
+    return render_template("cities_dropdown.html", cities=cities.json())
 
 
 @app.route('/result')

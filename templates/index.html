@@ -10,13 +10,18 @@
                         <input type="radio" name="operation_type_id" value="1"> For sale<Br>
                         <input type="radio" name="operation_type_id" value="2"> For long-term rent<Br>
                     </div>
-                    State
-                    <select name="state_id">
-                        <option value="all_states">All States</option>
-                        {% for i in states %}
-                        <option value={{i.get("id")}}>{{i.get("name")}}</option>
-                        {% endfor %}}
-                    </select><br>
+                    <div class="my-2s">
+                        State
+                        <select name="state_id" id="state_select">
+                            <option value="all_states">All States</option>
+                            {% for i in states %}
+                            <option value={{i.get("id")}}>{{i.get("name")}}</option>
+                            {% endfor %}}
+                        </select>
+                    </div>
+                    <div id="cities" class="my-2">
+                    </div>
+                    <br>
                     <br>
                     <div class="text"><b>From</b><b>To</b></div><br>
                     <div class="characteristics">
@@ -54,6 +59,7 @@
                             <option value={{i.get("id")}}>{{i.get("name")}}</option>
                             {% endfor %}}
                         </select><Br>
+                    </p>
                     <p>Type of information:<Br>
                         <input type="checkbox" name="latest" value='true'> Latest<Br>
                     </p>
