@@ -1,6 +1,18 @@
-{% extends "base.html" %}
-{% block content %}
-{% for items in list %}
-    <h4>{{items}}</h4>
-{% endfor %}
-{% endblock %}
+<h1>Results</h1>
+<div class="col">
+    <div class="list-group d-flex flex-row flex-wrap justify-content-around">
+        {% for item in list %}
+        <div class="card w-40">
+            <div class="col">
+                {% for key, value in item.items() %}
+                {% if key == 'href' %}
+                <a href={{ value }}><i>Go to the original announcement {{ item_in_for }}</i></a>
+                {% else %}
+                <b>{{ key }}</b>: {{ value|string }}<br>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>

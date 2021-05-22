@@ -4,7 +4,7 @@
     <div class="row  h-100">
         <div class="col-md-3 filters m-0 p-0">
             <div class="filter-wrapper px-3 mx-2">
-                <form action="{{ url_for('result') }}">
+                <form onsubmit="return onSubmit(this)" id="filters" method="POST">
                     <br>
                     <div>
                         <input type="radio" name="operation_type_id" value="1"> For sale<Br>
@@ -61,32 +61,15 @@
                         </select><Br>
                     </p>
                     <p>Type of information:<Br>
-                        <input type="checkbox" name="latest" value='true'> Latest<Br>
+                        <input type="checkbox" id="latest" name="latest" value='true'> Latest<Br>
                     </p>
                     <p><input type="submit" value="Apply"></p>
                 </form>
             </div>
         </div>
         <div class="col">
-            <div class="container-fluid bg-light h-100">
-                <h1>Results</h1>
-                <div class="col">
-                    <div class="list-group d-flex flex-row flex-wrap justify-content-around">
-                        {% for item in list %}
-                        <div class="card w-40">
-                            <div class="col">
-                                {% for key, value in item.items() %}
-                                {% if key == 'href' %}
-                                <a href={{ value }}><i>Go to the original announcement {{ item_in_for }}</i></a>
-                                {% else %}
-                                <b>{{ key }}</b>: {{ value|string }}<br>
-                                {% endif %}
-                                {% endfor %}
-                            </div>
-                        </div>
-                        {% endfor %}
-                    </div>
-                </div>
+            <div class="container-fluid bg-light h-100" id="results">
+               
             </div>
         </div>
     </div>

@@ -6,7 +6,7 @@ $(document).ready(function () {
     var state_id = this.value;
     var url = `http://localhost:8000/cities/${state_id}`;
     $.get(url, function (data) {
-      $("#cities").html(data);
+      $("#cities").html(data.data);
     });
   });
 });
@@ -20,4 +20,30 @@ function updateMain() {
     Math.max($(window).height() - margin_height, main.height())
   );
   main.css("margin-top", margin_height);
+}
+
+function onSubmit(form) {
+  var data = $(form).serializeArray();
+  var indexed_array = {};
+  data.map((n) => {
+    if (n["value"] !== "") indexed_array[n["name"]] = n["value"];
+  });
+
+  indexed_array["latest"] = $("#latest")[0].checked;
+
+  // console.log(data, indexed_array);
+  var url = `http://localhost:8000/result`;
+
+  var request = $.ajax({
+    url: url,
+    type: "post",
+    data: JSON.stringify(indexed_array),
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    success: function (response, textStatus, jqXHR) {
+      $("#results").html(response.data)
+    },
+  });
+
+  return false;
 }

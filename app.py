@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash, redirect, url_for
+from flask import Flask, render_template, request, jsonify
 from error_handlers import page_not_found, internal_server_error, bad_request_error
 import requests
 from constants import SERVICES
@@ -27,61 +27,29 @@ def get_cities_by_sattes(state_id):
     Returns html - dropdown of cities in state with state_id
     """
     cities = requests.get(f"http://127.0.0.1:5000/cities?state_id={state_id}")
-    print(cities.json())
-    return render_template("cities_dropdown.html", cities=cities.json())
+    return jsonify({"data": render_template("cities_dropdown.html", cities=cities.json())})
 
 
-@app.route('/result')
+@app.route('/result', methods=["POST"])
 def result():
-    states = requests.get("http://127.0.0.1:5000/states")
-    realty_types = requests.get("http://127.0.0.1:5000/realty_types")
-    operation_types = requests.get("http://127.0.0.1:5000/operation_types").json()
-    response = request.args
-    request_to_client_service = {
-        "price": {},
-        "square": {},
-        "floor": {},
-        "floors_number": {},
-        "page_ads_number": 10,
-        "page": 1
-    }
-    for key, value in response.items():
-        if value != "":
-            if "ge" in key or "le" in key:
-                try:
-                    request_to_client_service[key.split('-')[0]][key.split('-')[1]] = int(value)
-                except ValueError or KeyError:
-                    return redirect(url_for("main_page"))
-            elif key == "operation_type_id":
-                for operations in operation_types:
-                    if str(operations["id"]) == value:
-                        request_to_client_service[key] = operations["id"]
-                        break
-            elif "latest" in key and key == "latest":
-                try:
-                    request_to_client_service[key] = bool(value)
-                except ValueError:
-                    return redirect(url_for('main_page'))
-            else:
-                try:
-                    request_to_client_service[key] = int(value)
-                except ValueError:
-                    return redirect(url_for("main_page"))
-    response_from_server = requests.post("http://127.0.0.1:5000/realty", json=request_to_client_service).json()
+    response = request.get_json()
+    response["page"] = 1
+    response["page_ads_number"] = 10
+    response_from_server = requests.post("http://127.0.0.1:5000/realty", json=response).json()
     data_for_user = []
     for items in response_from_server:
         details = items["realty_details"]
         data_for_user.append(
             {
-                "City": items["city"]["name"],
+                "City": items["city"]["name"] if items["city"] else "Uknown",
+                "State": items["state"]["name"],
                 "Floor": details["floor"],
                 "Square": details["square"],
                 "Price": details["price"],
-                "href": f'{SERVICES[items["service"]["id"]]}{details["original_url"]}'
+                "href": details["original_url"]
             }
         )
-    return render_template("index.html", states=states.json(), realty_types=realty_types.json(), list=data_for_user,
-                           count=len(response_from_server))
+    return jsonify({"data": render_template("results.html", list=data_for_user, count=len(response_from_server))})
 
 
 if __name__ == "__main__":
