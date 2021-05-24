@@ -1,18 +1,24 @@
 <h1>Results</h1>
 <div class="col">
     <div class="list-group d-flex flex-row flex-wrap justify-content-around">
-        {% for item in list %}
-        <div class="card w-40">
-            <div class="col">
-                {% for key, value in item.items() %}
-                {% if key == 'href' %}
-                <a href={{ value }}><i>Go to the original announcement {{ item_in_for }}</i></a>
-                {% else %}
-                <b>{{ key }}</b>: {{ value|string }}<br>
-                {% endif %}
-                {% endfor %}
+        {% if list%}
+            {% for item in list %}
+            <div class="card w-40">
+                <div class="col">
+                    {% for key, value in item.items() %}
+                    {% if key == 'href' %}
+                    <a href={{ value }}><i>Go to the original announcement {{ item_in_for }}</i></a>
+                    {% else %}
+                    <b>{{ key }}</b>: {{ value|string }}<br>
+                    {% endif %}
+                    {% endfor %}
+                </div>
             </div>
-        </div>
-        {% endfor %}
+            {% endfor %}
+        {% else %}
+            <div class="w-100 p-4">
+                <p>No realties found(</p>
+            </div>
+        {% endif %}
     </div>
 </div>
