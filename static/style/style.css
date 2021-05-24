@@ -305,4 +305,12 @@ footer .footer-text {
   transform: translate(-50%, -50%);
 }
 
+.loading-icon {
+  position: relative;
+  display: none;
+  width: 10%;
+  max-width: 120px;
+  max-height: 120px;
+}
+
 /*# sourceMappingURL=style.css.map */

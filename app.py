@@ -35,6 +35,7 @@ def result():
     response = request.get_json()
     response["page"] = 1
     response["page_ads_number"] = 10
+    print(response)
     response_from_server = requests.post("http://127.0.0.1:5000/realty", json=response).json()
     data_for_user = []
     for items in response_from_server:
@@ -45,7 +46,7 @@ def result():
                 "State": items["state"]["name"],
                 "Floor": details["floor"],
                 "Square": details["square"],
-                "Price": details["price"],
+                "Price": "$" + str(details["price"]),
                 "href": details["original_url"]
             }
         )
@@ -53,4 +54,4 @@ def result():
 
 
 if __name__ == "__main__":
-    app.run(host='127.0.0.1', port=8000, debug=True)
+    app.run(host='127.0.0.1', port=8000, debug=False)

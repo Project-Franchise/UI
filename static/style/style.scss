@@ -199,3 +199,11 @@ footer {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+.loading-icon{
+  position: relative;
+  display: none;
+  width: 10%;
+  max-width: 120px;
+  max-height: 120px;
+}

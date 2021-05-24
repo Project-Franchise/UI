@@ -31,17 +31,27 @@ function onSubmit(form) {
 
   indexed_array["latest"] = $("#latest")[0].checked;
 
-  // console.log(data, indexed_array);
-  var url = `http://localhost:8000/result`;
+  $("#results").hide();
+  $("#loading-icon").show();
 
-  var request = $.ajax({
+  var url = `http://localhost:8000/result`;
+  console.log(indexed_array);
+
+  $.ajax({
     url: url,
     type: "post",
     data: JSON.stringify(indexed_array),
     contentType: "application/json; charset=utf-8",
     dataType: "json",
     success: function (response, textStatus, jqXHR) {
-      $("#results").html(response.data)
+      $("#loading-icon").hide();
+      $("#results").html(response.data);
+      $("#results").show();
+    },
+    error: function (ajaxContext) {
+      console.log(ajaxContext);
+      $("#loading-icon").hide();
+      $("html").html(ajaxContext.responseText)
     },
   });
 
