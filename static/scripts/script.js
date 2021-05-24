@@ -48,6 +48,11 @@ function onSubmit(form) {
       $("#results").html(response.data);
       $("#results").show();
     },
+    error: function (ajaxContext) {
+      console.log(ajaxContext);
+      $("#loading-icon").hide();
+      $("html").html(ajaxContext.responseText)
+    },
   });
 
   return false;
